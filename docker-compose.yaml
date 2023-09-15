@@ -1,0 +1,8 @@
+version: '3.1'
+services:
+  number-service:
+    build: ./number-service
+    image: number-service-image
+    container_name: number-service-container
+    ports:
+      - "8080:8080"
