@@ -17,12 +17,6 @@ public class NumberServiceImpl implements NumberService {
         log.info("Generated number: {}", generatedNumber);
         lastNumber = generatedNumber;
 
-        /*Если кто-то неправильно изменит код, то этот блок нужен*/
-        try {
-            Short.parseShort(generatedNumber.substring(1, 4));
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException("Не получилось преобразовать строку в число");
-        }
         return generatedNumber;
     }
 
@@ -30,7 +24,10 @@ public class NumberServiceImpl implements NumberService {
     @Override
     public String next() {
         if (lastNumber.isBlank()) {
-            return parseToStringResult("000");
+            String nextNumber = parseToStringResult("000");
+            log.info("Generated number: {}", nextNumber);
+            lastNumber = nextNumber;
+            return lastNumber;
         }
 
         String substringNumber = lastNumber.substring(1, 4);
